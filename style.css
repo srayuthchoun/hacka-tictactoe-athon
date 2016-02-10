@@ -1,0 +1,24 @@
+.container {
+    background-color: #000;
+    width: 600px;
+    margin: auto;
+    padding: 1px;
+}
+
+.cell {
+    background-color: #EEE;
+    width: 33.3%;
+    border: 2px solid black;
+    box-sizing: border-box;
+    padding-bottom: 30%;
+    float: left;
+    vertical-align: top;
+    position: relative;
+}
+
+.cell span {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
