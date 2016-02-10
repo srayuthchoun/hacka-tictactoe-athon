@@ -20,5 +20,6 @@ function player_turn (active_cell){
     }
     else {
         $(active_cell).append("<img src='images/firekirby.png'>");
+        current_player = player_x;
     }
 }
