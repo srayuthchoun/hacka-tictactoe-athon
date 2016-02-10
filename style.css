@@ -3,6 +3,7 @@
     width: 600px;
     margin: auto;
     padding: 1px;
+    border-radius: 15px;
 }
 
 .cell {
@@ -14,6 +15,7 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
+    border-radius: 15px;
 }
 
 .cell img {
