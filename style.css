@@ -11,14 +11,15 @@
     border: 2px solid black;
     box-sizing: border-box;
     padding-bottom: 30%;
-    float: left;
+    display: inline-block;
     vertical-align: top;
     position: relative;
 }
 
-.cell span {
+.cell img {
     position: absolute;
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 80%;
 }
