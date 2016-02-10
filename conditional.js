@@ -4,7 +4,7 @@
 //declare array that holds cells
 var cells = [];
 
-//hard coded conditionals for winning
+//hard coded conditional function for winning
 function winCondition() {
     if (cells[0] == cells[1] && cells[1] == cells[2]) {
         console.log("Someone won!");
@@ -31,6 +31,27 @@ function winCondition() {
         console.log("Someone won!");
     }
 }
-function winConditionDynamic() {
 
+//dynamic conditional function for winning
+function winConditionDynamic() {
+    //define variable that is equal to the length of cells in a side
+    var lengthOfSide = Math.sqrt(cells.length);
+    //for loop that checks every column for match
+    for (var verticalCheck = 0; verticalCheck < lengthOfSide; verticalCheck++) {
+
+    }
+    //for loop that checks every row for match
+    for (var horizontalCheck = 0; horizontalCheck < cells.length; horizontalCheck += (lengthOfSide - 1)) {
+        //left to right diagonal check
+        if (horizontalCheck == 0) {
+            for (var leftToRight = 0; leftToRight < cells.length; i++) {
+
+            }
+        }
+        //right to left diagonal check
+        else if (horizontalCheck == (cells.length - lengthOfSide)) {
+
+        }
+
+    }
 }
