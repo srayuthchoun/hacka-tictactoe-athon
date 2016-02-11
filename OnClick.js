@@ -23,7 +23,6 @@ var kirbys = {
     }
 };
 var player_1;
-var player_1;
 var player_2;
 var current_player = null;
 
@@ -43,8 +42,7 @@ function findKirby(src) {
 }
 
 $(document).ready(function(){
-    $('#pick-board-size').hide();
-    $('.cell-container').hide();
+
 
     $('.kirby-select').click(function(){
         var chosenKirby;
