@@ -153,5 +153,7 @@ function winConditionV2() {
     }
     //call function draw modal here
     gameOverModal('draw');
+
+    gameOver = true;
     console.log("It's a draw!");
 }

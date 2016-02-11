@@ -27,7 +27,7 @@ var player_2;
 var current_player = null;
 var player1_wins = 0;
 var player2_wins = 0;
-
+var games_played = 0;
 
 
 function update_wins() {
@@ -99,7 +99,7 @@ $(document).ready(function(){
         new_board(type);
         $('#pick-board-size').hide();
     });
-
+    //reset onclick function
     $('.game-stats').on('click', '.reset', function(){
         console.log("reset");
         reset();
