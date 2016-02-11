@@ -19,7 +19,7 @@ body {
 }
 
 .game-stats img {
-    width: 70%;
+    height: 200px;
     margin: auto;
     display: block;
     margin-bottom: 20px;
