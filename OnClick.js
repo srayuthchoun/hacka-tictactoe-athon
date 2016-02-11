@@ -18,9 +18,29 @@ var player_x = kirbys.cutter;
 var player_o = kirbys.fire;
 var current_player = null;
 
+function reset() {
+
+}
+
 $(document).ready(function(){
+<<<<<<< HEAD
+
+    $('.cell-container').hide();
+
+    $('.board-size').click(function(){
+        var type = $(this).val();
+        console.log(type);
+        new_board(type);
+        $('#pick-board-size').hide();
+    });
+
+    $('.reset').click(function(){
+        reset();
+    });
+
+
     playerStart(); //Call function to select which player goes first
-    $('.cell').click(function() {
+    $('.cell-container').on('click', '.cell', function() {
         if (!gameOver) {
             var active_cell = $(this);
             player_turn(active_cell); //Function call to process which square has been clicked and store them
