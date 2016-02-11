@@ -22,12 +22,23 @@ var kirbys = {
         name: 'Ice Kirby'
     }
 };
-var player_1 = kirbys.cutter;
-var player_2 = kirbys.fire;
+var player_1;
+var player_2;
 var current_player = null;
 
 function reset() {
 
+}
+
+function findKirby(src) {
+    var foundKirby;
+    for(var kirbytype in kirbys) {
+        if(src === kirbys[kirbytype].src) {
+            foundKirby = kirbytype;
+            console.log("found kirby! it's " + kirbytype);
+        }
+    }
+    return foundKirby;
 }
 
 $(document).ready(function(){
@@ -36,8 +47,15 @@ $(document).ready(function(){
 
     $('.kirby-select').click(function(){
        $(this).parent().hide();
-        if($(this).parent().hasClass('pick-player2')) {
+        if($(this).parent().hasClass('pick-player1')) {
+            player_1 = kirbys[findKirby($(this).find('img').attr('src'))];
+            console.log("player 1 is ", player_1);
+        }
+        else {
+            player_2 = kirbys[findKirby($(this).find('img').attr('src'))];
             $('#pick-board-size').show();
+            console.log("player 1 is ", player_2);
+
         }
     });
 
@@ -80,13 +98,13 @@ function player_turn (active_cell){
     if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
         if (current_player == player_1) { // checks which player gets to click first
             console.log('player_1 turn');
-            $(active_cell).append("<img src='" + images/cutterkirby.png + "'>"); //adds player_1 image to the selected div
+            $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
             current_player = player_2; //Sets current player to player_2
         }
         else {
             console.log('player_2 turn');
-            $(active_cell).append("<img src='images/firekirby.png'>"); //adds player_2 image to the selected div
+            $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
             cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
             current_player = player_1; //Sets current player to player_2
         }
