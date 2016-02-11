@@ -57,6 +57,7 @@ function player_turn (active_cell){
             current_player = player_x; //Sets current player to player_o
         }
     }
+
     console.log('active cell: ' + $(active_cell).index());
     console.log('cells array: ', cells);
 }
