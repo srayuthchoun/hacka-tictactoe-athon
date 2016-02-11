@@ -9,6 +9,7 @@ var kirbys = {
         src: 'images/cutterkirby.png',
         name: 'Cutter Kirby',
         ability: function(cell_clicked) {
+            console.log(lengthOfSide);
             var cell_index = $(cell_clicked).index();
             var row = Math.floor(cell_index / lengthOfSide) + 1;
             var firstCellInRow = lengthOfSide * (row - 1);
@@ -120,7 +121,21 @@ $(document).ready(function(){
             console.log("player 1 is ", player_2);
         }
         $(this).parent().hide();
+    });
 
+    $('.kirby-select').mouseover(function(){
+        if($(this).find('img').attr('src') == kirbys.cutter.src) {
+            $('.kirby-ability-desc').text("Cutter Kirby deletes all the Kirbys in a row that you click on.");
+        }
+        else if($(this).find('img').attr('src') == kirbys.fire.src) {
+            $('.kirby-ability-desc').text("Fire Kirby deletes a single Kirby on the cell you click on.");
+        }
+        else if($(this).find('img').attr('src') == kirbys.ice.src) {
+            $('.kirby-ability-desc').text("Ice Kirby disables a single cell you click on from being used.");
+        }
+        else if($(this).find('img').attr('src') == kirbys.bomb.src) {
+            $('.kirby-ability-desc').text("Bomb Kirby deletes all Kirbys on the spaces next to and including the cell you click on.");
+        }
     });
 
     $('.board-size').click(function(){
@@ -187,10 +202,11 @@ function player_turn (active_cell){
                 if(cells[$(active_cell).index()] == null) {
                     $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
                     cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+                    winConditionV3(active_cell, 5);
+
                 }
 
             }
-            winConditionV3(active_cell, 5);
 
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
@@ -204,10 +220,10 @@ function player_turn (active_cell){
                 if(cells[$(active_cell).index()] == null) {
                     $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
                     cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+                    winConditionV3(active_cell, 5);
 
                 }
             }
-            winConditionV3(active_cell, 5);
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);

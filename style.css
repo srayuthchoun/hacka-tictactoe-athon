@@ -89,9 +89,6 @@ h3 {
     color: #FFF;
     border-radius: 15px;
     border: 3px solid #FFF;
-}
-
-.reset {
     background-color: #F1428F;
 
 }
@@ -232,6 +229,21 @@ h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.kirby-ability-desc {
+    width: 100%;
+    height: 120px;
+    padding: 20px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+    background-color: #F1428F;
 }
 
 

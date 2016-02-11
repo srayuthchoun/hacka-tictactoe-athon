@@ -46,7 +46,7 @@ function winCondition() {
 function winConditionV2() {
     //define variable that is equal to the length of cells in a side
     //this is done by finding the square root of the length of array
-    lengthOfSide = Math.sqrt(cells.length)
+    lengthOfSide = Math.sqrt(cells.length);
     //column checker
     //for loop that acts as start point for every column
     for (var column = 0; column < lengthOfSide; column++) {
@@ -164,7 +164,7 @@ function winConditionV2() {
 
 //extra dynamic conditional function for winning by checking given in a row
 function winConditionV3(active_cell, toMatch) {
-    var lengthOfSide = Math.sqrt(cells.length);
+    lengthOfSide = Math.sqrt(cells.length);
     var matches = 0;
     var same = true;
     var activeIndex = active_cell.index();
