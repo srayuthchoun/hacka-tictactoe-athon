@@ -143,8 +143,7 @@ function player_turn (active_cell){
             console.log('player_1 turn');
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
-            winConditionV2();
-
+            winConditionV3(active_cell, 5);
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
@@ -153,16 +152,12 @@ function player_turn (active_cell){
             console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
             cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
-            winConditionV2();
-
+            winConditionV3(active_cell, 5);
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);
         }
     }
-
-    console.log('active cell: ' + $(active_cell).index());
-    console.log('cells array: ', cells);
 }
 
 
