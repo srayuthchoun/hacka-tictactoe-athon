@@ -42,7 +42,7 @@ h3 {
     margin-top: 0;
 }
 
-.player1-score span, .player2-score span, .player-turn {
+.player1-score span, .player2-score span, .player-turn, .games-played span {
     font-family: Sniglet, sans-serif;
     font-weight: 400;
     font-size: 28px;
@@ -51,7 +51,7 @@ h3 {
     box-sizing: border-box;
 }
 
-.player1-score span, .player2-score span {
+.player1-score span, .player2-score span, .games-played span {
     width: 50%;
 }
 
