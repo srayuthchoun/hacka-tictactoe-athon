@@ -16,10 +16,14 @@ var kirbys = {
     'bomb': {
         src: 'images/bombkirby.png',
         name: 'Bomb Kirby'
+    },
+    'ice': {
+        src: 'images/icekirby.png',
+        name: 'Ice Kirby'
     }
 };
-var player_x = kirbys.cutter;
-var player_o = kirbys.fire;
+var player_1 = kirbys.cutter;
+var player_2 = kirbys.fire;
 var current_player = null;
 
 function reset() {
@@ -62,29 +66,29 @@ $(document).ready(function(){
 //Function to set which player goes first
 function playerStart() {
     var random_num = Math.floor((Math.random() * 2) + 1); //Generate a random number either 1 or 2
-    if(random_num==1){  //Player_x starts first if true
-        current_player = player_x;
-        console.log('player_x goes first');
+    if(random_num==1){  //player_1 starts first if true
+        current_player = player_1;
+        console.log('player_1 goes first');
     }
     else{
-        current_player = player_o;  //Player_o starts first if the above conditional is false
+        current_player = player_2;  //player_2 starts first if the above conditional is false
         console.log('player_y goes first');
     }
 }
 //Function checks which player gets to click first
 function player_turn (active_cell){
     if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
-        if (current_player == player_x) { // checks which player gets to click first
-            console.log('player_x turn');
-            $(active_cell).append("<img src='images/cutterkirby.png'>"); //adds player_x image to the selected div
-            cells[$(active_cell).index()] = player_x; //adds player_x click to the array
-            current_player = player_o; //Sets current player to player_o
+        if (current_player == player_1) { // checks which player gets to click first
+            console.log('player_1 turn');
+            $(active_cell).append("<img src='" + images/cutterkirby.png + "'>"); //adds player_1 image to the selected div
+            cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+            current_player = player_2; //Sets current player to player_2
         }
         else {
-            console.log('player_o turn');
-            $(active_cell).append("<img src='images/firekirby.png'>"); //adds player_o image to the selected div
-            cells[$(active_cell).index()] = player_o; //adds player_o click to the array
-            current_player = player_x; //Sets current player to player_o
+            console.log('player_2 turn');
+            $(active_cell).append("<img src='images/firekirby.png'>"); //adds player_2 image to the selected div
+            cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+            current_player = player_1; //Sets current player to player_2
         }
     }
 
