@@ -120,7 +120,7 @@ h3 {
 
 
 
-#pick-board-size, #pick-player1 {
+#pick-board-size, .pick-player1, .pick-player2 {
     position: absolute;
     top: 0;
     width: 100%;
@@ -136,9 +136,16 @@ h3 {
     z-index: 2;
 }
 
-#pick-player1 {
+.pick-player2 {
     z-index: 3;
+}
 
+.pick-player1 {
+    z-index: 4;
+}
+
+.board-size, .kirby-select {
+    cursor: pointer;
 }
 
 .board-size {

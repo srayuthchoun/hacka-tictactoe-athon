@@ -12,6 +12,10 @@ var kirbys = {
     'fire': {
         src: 'images/firekirby.png',
         name: 'Fire Kirby'
+    },
+    'bomb': {
+        src: 'images/bombkirby.png',
+        name: 'Bomb Kirby'
     }
 };
 var player_x = kirbys.cutter;
@@ -23,9 +27,15 @@ function reset() {
 }
 
 $(document).ready(function(){
-<<<<<<< HEAD
-
+    $('#pick-board-size').hide();
     $('.cell-container').hide();
+
+    $('.kirby-select').click(function(){
+       $(this).parent().hide();
+        if($(this).parent().hasClass('pick-player2')) {
+            $('#pick-board-size').show();
+        }
+    });
 
     $('.board-size').click(function(){
         var type = $(this).val();

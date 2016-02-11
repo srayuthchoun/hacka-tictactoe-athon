@@ -6,24 +6,38 @@ function new_board(type) {
 
     switch(type) {
         case 'x15-board':
+            //create cells
             for(var i = 0; i < 225; i++) {
                 $('.cell-container').append($('<div>').addClass('cell x15'));
-
+            }
+            //change array size
+            for(var j = 0; j < 225 - 9; j++){
+                cells.push(null);
             }
             break;
         case 'x10-board':
+            //create cells
             for(var i = 0; i < 100; i++) {
                 $('.cell-container').append($('<div>').addClass('cell x10'));
-
+            }
+            //change array size
+            for(var j = 0; j < 100 - 9; j++){
+                cells.push(null);
             }
             break;
         case 'x5-board':
+            //create cells
             for(var i = 0; i < 25; i++) {
                 $('.cell-container').append($('<div>').addClass('cell x5'));
 
             }
+            //change array size
+            for(var j = 0; j < 25 - 9; j++){
+                cells.push(null);
+            }
             break;
         case 'x3-board':
+            //create cells
             for(var i = 0; i < 9; i++) {
                 $('.cell-container').append($('<div>').addClass('cell x3'));
 
