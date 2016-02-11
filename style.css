@@ -7,13 +7,13 @@ body {
 
 #main-container {
     margin: auto;
-    width: 80%;
+    width: 70%;
 
 }
 
 .game-stats {
     float: left;
-    width: 27%;
+    width: 30%;
     display: inline-block;
     margin-right: 3%;
 }
@@ -59,7 +59,21 @@ h1 {
 }
 
 .reset:hover {
-    background-color: #FF8FC0;
+    animation:rainbow 1.5s infinite;
+}
+
+@-webkit-keyframes rainbow {
+    0% {background-color: #DB4040;}
+    10% {background-color: #FA9937;}
+    20% {background-color: #F5E589;}
+    30% {background-color: #99D65C;}
+    40% {background-color: #3FBF50;}
+    50% {background-color: #55C98F;}
+    60% {background-color: #3FDDE8;}
+    70% {background-color: #2D7ECF;}
+    80% {background-color: #3434AD;}
+    90% {background-color: #7D3CBD;}
+    100% {background-color: #F1428F;}
 }
 
 .cell-container {
@@ -72,16 +86,53 @@ h1 {
     border-radius: 15px;
 }
 
-.cell {
+#pick-board-size {
+    width: 100%;
     background: linear-gradient(#eefbfc, #cbe1ea);
-    width: 33.3%;
     border: 2px solid #324d8f;
     box-sizing: border-box;
-    padding-bottom: 30%;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 2;
+}
+
+h2 {
+    font-family: Sniglet, sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #F1428F;
+}
+
+.cell {
+    background: linear-gradient(#eefbfc, #cbe1ea);
+    border: 2px solid #324d8f;
+    box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
     position: relative;
     border-radius: 15px;
+}
+
+.cell.x3 {
+    width: 33.3%;
+    padding-bottom: 33.3%;
+}
+
+.cell.x5 {
+    width: 20%;
+    padding-bottom: 20%;
+}
+
+.cell.x10 {
+    width: 10%;
+    padding-bottom: 10%;
+}
+
+.cell.x15 {
+    width: 6.6%;
+    padding-bottom: 6.6%;
+    border-width: 1px;
 }
 
 .cell img {
@@ -89,5 +140,5 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 100%;
 }

@@ -7,8 +7,28 @@ var player_o = 0;
 var current_player = player_x;
 var cells = [null, null, null, null, null, null, null, null, null];
 
+function reset() {
+
+}
+
 $(document).ready(function(){
-    $('.cell').click(function() {
+
+
+    $('.board-size').click(function(){
+        var type = $(this).val();
+        console.log(type);
+        new_board(type);
+        $('#pick-board-size').hide();
+    });
+
+    $('.reset').click(function(){
+        reset();
+    });
+
+
+
+    $('.cell-container').on('click', '.cell', function() {
+        console.log($(this).index());
         var active_cell = $(this);
         player_turn(active_cell);
     });
