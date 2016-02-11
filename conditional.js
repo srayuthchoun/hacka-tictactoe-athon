@@ -50,11 +50,11 @@ function winConditionV2() {
     //for loop that acts as start point for every column
     for (var column = 0; column < lengthOfSide; column++) {
         //for loop that goes through current column
-        for (var y = column; y < cells.length; y += lengthOfSide) {
+        for (var row = column; row < cells.length; row += lengthOfSide) {
             //if you reach the end of the column, then all elements are matching
             //if current index of array is not null and the next incremented index is undefined
-            if (cells[y] != null && cells[y + lengthOfSide] === undefined) {
-                console.log("Column Win!");
+            if (cells[row] != null && cells[row + lengthOfSide] === undefined) {
+                console.log("Column", (column + 1), "wins!");
                 //set bool gameOver to true
                 gameOver = true;
                 //call function win modal here
@@ -63,9 +63,9 @@ function winConditionV2() {
                 return;
             }
             //else if current index of array is not the same as next increment of array
-            else if (cells[y] != cells[y + lengthOfSide]) {
+            else if (cells[row] != cells[row + lengthOfSide]) {
                 //exit immediate loop by breaking the loop condition
-                y = cells.length;
+                row = cells.length;
             }
         }
         //left to right diagonal check
@@ -76,7 +76,7 @@ function winConditionV2() {
                 //if you reach the end of the diagonal, then all elements are matching
                 //if current index of array is not null and the next incremented index is undefined
                 if (cells[leftToRight] != null && cells[leftToRight + lengthOfSide] === undefined) {
-                    console.log("Diagonal Win!");
+                    console.log("Left to right diagonal wins!");
                     //set bool gameOver to true
                     gameOver = true;
                     //call function win modal here
@@ -99,7 +99,7 @@ function winConditionV2() {
                 //if you reach the end of the diagonal, then all elements are matching
                 //if current index of array is not null and the next incremented index is undefined
                 if (cells[rightToLeft] != null && cells[rightToLeft + lengthOfSide] === undefined) {
-                    console.log("Diagonal Win!");
+                    console.log("Right to left diagonal wins!");
                     //set bool gameOver to true
                     gameOver = true;
                     //call function win modal here
@@ -117,15 +117,16 @@ function winConditionV2() {
     }
     //row checker
     //for loop that acts as start point for every row
-    for (var y = 0; y < cells.length; y += lengthOfSide) {
-        //define var that will keep track of how many times the loop runs
+    for (var row = 0; row < cells.length; row += lengthOfSide) {
+        //define var that will keep track how many times the loop runs
         //this solved the problem with the next index of the end of row being the next row
         var numOfLoops = 0;
         //for loop that goes through current row
-        for (var x = y; x < (y + lengthOfSide); ++x) {
-            //if (cells[x] != null && cells[x + 1] === undefined) {
-            if (cells[x] != null && numOfLoops == (lengthOfSide - 1)) {
-                console.log("Row Win!");
+        for (var column = row; column < (row + lengthOfSide); ++column) {
+            //if you reach the end of the row, then all elements are matching
+            //if current index of array is not null and you have looped to the end of row
+            if (cells[column] != null && numOfLoops == (lengthOfSide - 1)) {
+                console.log("Row", ((row / lengthOfSide) + 1), "wins!");
                 //set bool gameOver to true
                 gameOver = true;
                 //call function win modal here
@@ -134,9 +135,9 @@ function winConditionV2() {
                 return;
             }
             //else if current index of array is not the same as next increment of array
-            else if (cells[x] != cells[x + 1]) {
+            else if (cells[column] != cells[column + 1]) {
                 //exit immediate loop by breaking the loop condition
-                x = cells.length;
+                column = cells.length;
             }
             //increment the count for times looped
             ++numOfLoops;
@@ -147,11 +148,11 @@ function winConditionV2() {
     for (var i = 0; i < cells.length; i++) {
         //if current index of array is null,
         if (cells[i] == null) {
-            //call function draw modal here
-
             //exit function
             return;
         }
     }
+    //call function draw modal here
+
     console.log("It's a draw!");
 }
