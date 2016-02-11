@@ -23,6 +23,7 @@ var kirbys = {
     }
 };
 var player_1;
+var player_1;
 var player_2;
 var current_player = null;
 
@@ -46,17 +47,21 @@ $(document).ready(function(){
     $('.cell-container').hide();
 
     $('.kirby-select').click(function(){
-       $(this).parent().hide();
+        var chosenKirby;
         if($(this).parent().hasClass('pick-player1')) {
-            player_1 = kirbys[findKirby($(this).find('img').attr('src'))];
+            chosenKirby = findKirby($(this).find('img').attr('src'));
+            player_1 = kirbys[chosenKirby];
+            //remove the chosen kirby so that next player can't select it
+            $("[src='" + $(this).find('img').attr('src') + "']").parent().hide();
             console.log("player 1 is ", player_1);
         }
         else {
             player_2 = kirbys[findKirby($(this).find('img').attr('src'))];
             $('#pick-board-size').show();
             console.log("player 1 is ", player_2);
-
         }
+        $(this).parent().hide();
+
     });
 
     $('.board-size').click(function(){
