@@ -9,8 +9,11 @@ var cells = [null, null, null, null, null, null, null, null, null];
 
 $(document).ready(function(){
     $('.cell').click(function() {
-        var active_cell = $(this);
-        player_turn(active_cell);
+        if (!gameOver) {
+            var active_cell = $(this);
+            player_turn(active_cell);
+            winConditionV2();
+        }
     });
 });
 
