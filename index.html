@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Kirby Fight!</title>
+    <link href='https://fonts.googleapis.com/css?family=Sniglet:400,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="conditional.js"></script>
     <script src="OnClick.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div><!--
-    --><div class="cell"></div>
-
+<div id="main-container">
+    <div class="game-stats">
+        <h1>Kirby Fight!</h1>
+        <div class="player1-score"><span class="label">Player 1:</span><span class="value">0</span></div>
+        <div class="player2-score"><span class="label">Player 2:</span><span class="value">0</span></div>
+        <button class="reset">Reset</button>
+    </div>
+    <div class="cell-container">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
 
 </div>
+
 </body>
 </html>

@@ -1,15 +1,81 @@
-.container {
-    background-color: #000;
-    width: 600px;
+body {
+    background-size: 120px;
+    background-image: url('images/kirby_bg_tp.png');
+    background-color: #ffe464;
+    font-size: 0;
+}
+
+#main-container {
     margin: auto;
-    padding: 1px;
+    width: 80%;
+
+}
+
+.game-stats {
+    float: left;
+    width: 27%;
+    display: inline-block;
+    margin-right: 3%;
+}
+
+h1 {
+    font-family: Sniglet, sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #324d8f;
+    text-shadow: 2px 2px #FFF;
+}
+
+.player1-score span, .player2-score span {
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #324d8f;
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.label {
+    text-align: left;
+}
+.value {
+    text-align: right;
+    padding: 0 20px;
+}
+
+.reset {
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 20px 20px 20px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    background-color: #F1428F;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.reset:hover {
+    background-color: #FF8FC0;
+}
+
+.cell-container {
+    display: inline-block;
+
+    float: left;
+    background-color: #324d8f;
+    width: 65%;
+    padding: 3px;
     border-radius: 15px;
 }
 
 .cell {
-    background-color: #EEE;
+    background: linear-gradient(#eefbfc, #cbe1ea);
     width: 33.3%;
-    border: 2px solid black;
+    border: 2px solid #324d8f;
     box-sizing: border-box;
     padding-bottom: 30%;
     display: inline-block;
@@ -20,7 +86,7 @@
 
 .cell img {
     position: absolute;
-    top: 52%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
