@@ -4,6 +4,8 @@
 //define boolean that acts as a flag for when game can be played or not
 var gameOver = false;
 
+var lengthOfSide;
+
 //hard coded conditional function for winning
 function winCondition() {
     if (cells[1] != null && cells[0] == cells[1] && cells[1] == cells[2]) {
@@ -44,8 +46,7 @@ function winCondition() {
 function winConditionV2() {
     //define variable that is equal to the length of cells in a side
     //this is done by finding the square root of the length of array
-    var lengthOfSide = Math.sqrt(cells.length);
-
+    lengthOfSide = Math.sqrt(cells.length)
     //column checker
     //for loop that acts as start point for every column
     for (var column = 0; column < lengthOfSide; column++) {

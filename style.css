@@ -45,14 +45,22 @@ h3 {
 .player1-score span, .player2-score span, .player-turn, .games-played span {
     font-family: Sniglet, sans-serif;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 22px;
     color: #324d8f;
     display: inline-block;
     box-sizing: border-box;
 }
 
-.player1-score span, .player2-score span, .games-played span {
+.player1-score span, .player2-score span {
     width: 50%;
+}
+
+.games-played .label {
+    width: 70%;
+}
+
+.games-played .value {
+    width: 30%;
 }
 
 .player-turn {
@@ -76,19 +84,52 @@ h3 {
     font-family: Sniglet, sans-serif;
     font-weight: 400;
     font-size: 28px;
-    margin: 20px 20px 20px 0;
+    margin: 5px 10px 5px 0;
     box-sizing: border-box;
     color: #FFF;
-    background-color: #F1428F;
     border-radius: 15px;
     border: 3px solid #FFF;
 }
 
-.reset:focus, #pick-board-size button{
+.reset {
+    background-color: #F1428F;
+
+}
+
+.ability-enabled {
+    background-color: #86C429;
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.ability-disabled {
+    background-color: #888;
+    cursor: auto;
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.reset:focus, #pick-board-size button, .ability-enabled:focus{
     outline: none;
 }
 
-.reset:hover, .board-size:hover {
+.reset:hover, .board-size:hover, .ability-enabled:hover {
     animation:rainbow 1.5s infinite;
 }
 
@@ -150,7 +191,7 @@ h3 {
     z-index: 4;
 }
 
-.board-size, .kirby-select, .reset, .cell{
+.board-size, .kirby-select, .reset, .cell, .ability{
     cursor: pointer;
 }
 
@@ -239,6 +280,14 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+}
+
+.cell-ability {
+    background-color: black;
+}
+
+.cell-ability:hover {
+    animation:rainbow 1.5s infinite;
 }
 
 #player1-win, #player2-win, #draw {

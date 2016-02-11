@@ -2,16 +2,41 @@
  *   Created by Srayuth Choun on 2/10/2016.
  */
 
-
 var cells = [];
+
 var kirbys = {
     'cutter': {
         src: 'images/cutterkirby.png',
-        name: 'Cutter Kirby'
+        name: 'Cutter Kirby',
+        ability: function(cell_clicked) {
+            var cell_index = $(cell_clicked).index();
+            var row = Math.floor(cell_index / lengthOfSide) + 1;
+            var firstCellInRow = lengthOfSide * (row - 1);
+            var lastCellInRow = (lengthOfSide * row) - 1;
+            for(var i = firstCellInRow; i <= lastCellInRow; i++) {
+                cells[i] = null;
+                $('.cell').eq(i).find('img').remove();
+            }
+            this.canUseAbility = false;
+            this.abilityActiveState = false;
+
+        },
+        canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
+        abilityActiveState: false //this is if the button was clicked and is ready to use
     },
     'fire': {
         src: 'images/firekirby.png',
-        name: 'Fire Kirby'
+        name: 'Fire Kirby',
+        ability: function(cell_clicked) {
+            var cell_index = $(cell_clicked).index();
+            $(cell_clicked).find('img').remove();
+            cells[cell_index] = null;
+
+            this.canUseAbility = false;
+            this.abilityActiveState = false;
+        },
+        canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
+        abilityActiveState: false //this is if the button was clicked and is ready to use
     },
     'bomb': {
         src: 'images/bombkirby.png',
@@ -52,6 +77,8 @@ function game_over() {
 function reset() {
     cells = [];
     gameOver = false;
+    player_1.canUseAbility = true;
+    player_2.canUseAbility = true;
     player_1 = null;
     player_2 = null;
     $('.cell-container').hide();
@@ -59,6 +86,9 @@ function reset() {
     $('.kirby-select').parent().show();
     $('.kirby-select').show();
     $('.gameovermodal').hide();
+    $('[value="ability"]').removeClass('ability-disabled');
+    $('[value="ability"]').addClass('ability-enabled');
+
 }
 
 function findKirby(src) {
@@ -105,6 +135,12 @@ $(document).ready(function(){
         reset();
     });
 
+    $('[value="ability"]').click(function() {
+        if($(this).hasClass('ability-enabled')) {
+            current_player.abilityActiveState = true;
+        }
+    });
+
 
     playerStart(); //Call function to select which player goes first
     $('.cell-container').on('click', '.cell', function() {
@@ -129,23 +165,48 @@ function playerStart() {
 }
 //Function checks which player gets to click first
 function player_turn (active_cell){
-    if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
-        if (current_player == player_1) { // checks which player gets to click first
-            console.log('player_1 turn');
-            $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
-            cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
-            winConditionV2();
 
+
+
+     //Checks to make sure current cell has not been clicked
+        if (current_player == player_1) { // checks which player gets to click first
+            if(player_1.abilityActiveState === true) {
+                player_1.ability(active_cell);
+            }
+            else {
+                if(cells[$(active_cell).index()] == null) {
+                    $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
+                    cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+                }
+
+            }
+            winConditionV2();
             current_player = player_2; //Sets current player to player_2
         }
         else {
-            console.log('player_2 turn');
-            $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
-            cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
-            winConditionV2();
+            if(player_2.abilityActiveState === true) {
+                player_2.ability(active_cell);
+            }
+            else {
+                if(cells[$(active_cell).index()] == null) {
+                    $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
+                    cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
 
+                }
+            }
+            winConditionV2();
             current_player = player_1; //Sets current player to player_2
-        }
+
+
+    }
+
+    if(current_player.canUseAbility === false) { //makes the ability button grey
+        $('[value="ability"]').removeClass('ability-enabled');
+        $('[value="ability"]').addClass('ability-disabled');
+    }
+    else {
+        $('[value="ability"]').removeClass('ability-disabled');
+        $('[value="ability"]').addClass('ability-enabled');
     }
 
     console.log('active cell: ' + $(active_cell).index());
