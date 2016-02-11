@@ -48,8 +48,15 @@ $(document).ready(function(){
         $('#pick-board-size').hide();
     });
 
-    $('.reset').click(function(){
-        reset();
+    $('.game-stats').on('click', '.reset', function(){
+        console.log("reset");
+        cells = [null, null, null, null, null, null, null, null, null];
+        gameOver = false;
+        player_1 = null;
+        player_2 = null;
+        $('.cell-container').hide();
+        $('.kirby-select').parent().show();
+        $('.kirby-select').show();
     });
 
 
@@ -72,7 +79,7 @@ function playerStart() {
     }
     else{
         current_player = player_2;  //player_2 starts first if the above conditional is false
-        console.log('player_y goes first');
+        console.log('player_2 goes first');
     }
 }
 //Function checks which player gets to click first
@@ -80,7 +87,7 @@ function player_turn (active_cell){
     if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
         if (current_player == player_1) { // checks which player gets to click first
             console.log('player_1 turn');
-            $(active_cell).append("<img src='" + images/cutterkirby.png + "'>"); //adds player_1 image to the selected div
+            $(active_cell).append("<img src='images/cutterkirby.png'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
             current_player = player_2; //Sets current player to player_2
         }
