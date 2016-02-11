@@ -157,3 +157,136 @@ function winConditionV2() {
     gameOver = true;
     console.log("It's a draw!");
 }
+
+
+
+
+//extra dynamic conditional function for winning by checking given in a row
+function winConditionV3(active_cell, toMatch) {
+    var lengthOfSide = Math.sqrt(cells.length);
+    var matches = 0;
+    var same = true;
+    var activeIndex = active_cell.index();
+
+    console.log("Active Index:", activeIndex);
+    console.log("Amount to match:", toMatch);
+    //left side checker
+    var left = activeIndex;
+    while (same) {
+        if (cells[left] == cells[left - 1] && ((left - 1) % lengthOfSide) != (lengthOfSide - 1)) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        --left;
+    }
+    same = true;
+    //right side checker
+    var right = activeIndex;
+    while (same) {
+        if (cells[right] == cells[right + 1] && ((right + 1) % lengthOfSide) != (0)) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        ++right;
+    }
+    if (matches >= (toMatch - 1)) {
+        console.log(current_player.name, "wins!");
+        gameOver = true;
+        return;
+    }
+    matches = 0;
+    same = true;
+    //top side checker
+    var top = activeIndex;
+    while (same) {
+        if (cells[top] == cells[top - lengthOfSide] && cells[top - lengthOfSide] != null) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        top -= lengthOfSide;
+    }
+    same = true;
+    //bottom side checker
+    var bottom = activeIndex;
+    while (same) {
+        if (cells[bottom] == cells[bottom + lengthOfSide] && cells[bottom + lengthOfSide]  != null) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        bottom += lengthOfSide;
+    }
+    if (matches >= (toMatch - 1)) {
+        console.log(current_player.name, "wins!");
+        gameOver = true;
+        return;
+    }
+    matches = 0;
+    same = true;
+    //top left diagonal checker
+    var topLeft = activeIndex;
+    while (same) {
+        if (cells[topLeft] == cells[topLeft - (lengthOfSide + 1)] && ((topLeft - (lengthOfSide + 1)) % lengthOfSide) != (lengthOfSide - 1)) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        topLeft -= (lengthOfSide + 1);
+    }
+    same = true;
+    //bot right side checker
+    var botRight = activeIndex;
+    while (same) {
+        if (cells[botRight] == cells[botRight + (lengthOfSide + 1)] && ((lengthOfSide + 1) % lengthOfSide) != 0) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        botRight += (lengthOfSide + 1);
+    }
+    if (matches >= (toMatch - 1)) {
+        console.log(current_player.name, "wins!");
+        gameOver = true;
+        return;
+    }
+    matches = 0;
+    same = true;
+    //top right diagonal checker
+    var topRight = activeIndex;
+    while (same) {
+        if (cells[topRight] == cells[topRight - (lengthOfSide - 1)] && ((topRight - (lengthOfSide - 1)) % lengthOfSide) != 0) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        topRight -= (lengthOfSide - 1);
+    }
+    same = true;
+    //bot left side checker
+    var botLeft = activeIndex;
+    while (same) {
+        if (cells[botLeft] == cells[botLeft + (lengthOfSide - 1)] && ((lengthOfSide - 1) % lengthOfSide) != (lengthOfSide - 1)) {
+            ++matches;
+        }
+        else {
+            same = false;
+        }
+        botLeft += (lengthOfSide - 1);
+    }
+    if (matches >= (toMatch - 1)) {
+        console.log(current_player.name, "wins!");
+        gameOver = true;
+        return;
+    }
+
+}
