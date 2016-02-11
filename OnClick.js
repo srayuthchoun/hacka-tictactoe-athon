@@ -23,9 +23,9 @@ var kirbys = {
     }
 };
 var player_1;
-var player_1;
 var player_2;
 var current_player = null;
+var games_played = 0;
 
 function reset() {
 
@@ -70,13 +70,15 @@ $(document).ready(function(){
         new_board(type);
         $('#pick-board-size').hide();
     });
-
+    //reset onclick function
     $('.game-stats').on('click', '.reset', function(){
         console.log("reset");
         cells = [null, null, null, null, null, null, null, null, null];
         gameOver = false;
+        ++games_played;
         player_1 = null;
         player_2 = null;
+        $('.games-played > .value').text(games_played);
         $('.cell-container').hide();
         $('.kirby-select').parent().show();
         $('.kirby-select').show();
