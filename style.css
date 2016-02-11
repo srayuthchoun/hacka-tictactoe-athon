@@ -58,7 +58,7 @@ h1 {
     border: 3px solid #FFF;
 }
 
-.reset:hover {
+.reset:hover, .board-size:hover {
     animation:rainbow 1.5s infinite;
 }
 
@@ -78,7 +78,6 @@ h1 {
 
 .cell-container {
     display: inline-block;
-
     float: left;
     background-color: #324d8f;
     width: 65%;
@@ -95,6 +94,20 @@ h1 {
     border-radius: 15px;
     padding: 20px;
     z-index: 2;
+}
+
+.board-size {
+    width: 47.5%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 1%;
+    box-sizing: border-box;
+    color: #FFF;
+    background-color: #86C429;
+    border-radius: 15px;
+    border: 3px solid #FFF;
 }
 
 h2 {
