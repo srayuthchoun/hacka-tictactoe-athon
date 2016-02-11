@@ -13,6 +13,7 @@ function reset() {
 
 $(document).ready(function(){
 
+    $('.cell-container').hide();
 
     $('.board-size').click(function(){
         var type = $(this).val();
