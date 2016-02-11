@@ -83,14 +83,8 @@ function winConditionV2() {
                 if (cells[leftToRight] != null && cells[leftToRight + lengthOfSide] === undefined) {
                     console.log("Left to right diagonal wins!");
                     //set bool gameOver to true
-                    gameOver = true;
                     //call function win modal here
-                    if(current_player == player_1) {
-                        gameOverModal('player1');
-                    }
-                    else {
-                        gameOverModal('player2');
-                    }
+                    game_over()
                     //exit function
                     return;
                 }
@@ -110,15 +104,7 @@ function winConditionV2() {
                 //if current index of array is not null and the next incremented index is undefined
                 if (cells[rightToLeft] != null && cells[rightToLeft + lengthOfSide] === undefined) {
                     console.log("Right to left diagonal wins!");
-                    //set bool gameOver to true
-                    gameOver = true;
-                    //call function win modal here
-                    if(current_player == player_1) {
-                        gameOverModal('player1');
-                    }
-                    else {
-                        gameOverModal('player2');
-                    }
+                    game_over()
                     //exit function
                     return;
                 }
@@ -143,14 +129,7 @@ function winConditionV2() {
             if (cells[column] != null && numOfLoops == (lengthOfSide - 1)) {
                 console.log("Row", ((row / lengthOfSide) + 1), "wins!");
                 //set bool gameOver to true
-                gameOver = true;
-                //call function win modal here
-                if(current_player == player_1) {
-                    gameOverModal('player1');
-                }
-                else {
-                    gameOverModal('player2');
-                }
+                game_over()
                 //exit function
                 return;
             }

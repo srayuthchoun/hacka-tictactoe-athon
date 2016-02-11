@@ -25,6 +25,29 @@ var kirbys = {
 var player_1;
 var player_2;
 var current_player = null;
+var player1_wins = 0;
+var player2_wins = 0;
+
+
+
+function update_wins() {
+    $('.player1-score .value').text(player1_wins);
+    $('.player2-score .value').text(player2_wins);
+
+}
+
+function game_over() {
+    gameOver = true;
+    if(current_player == player_1) {
+        gameOverModal('player1');
+        player1_wins++;
+    }
+    else {
+        gameOverModal('player2');
+        player2_wins++;
+    }
+    update_wins();
+}
 
 function reset() {
     cells = [null, null, null, null, null, null, null, null, null];
