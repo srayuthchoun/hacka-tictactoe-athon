@@ -11,7 +11,7 @@ function new_board(type) {
                 $('.cell-container').append($('<div>').addClass('cell x15'));
             }
             //change array size
-            for(var j = 0; j < 225 - 9; j++){
+            for(var j = 0; j < 225; j++){
                 cells.push(null);
             }
             break;
@@ -21,7 +21,7 @@ function new_board(type) {
                 $('.cell-container').append($('<div>').addClass('cell x10'));
             }
             //change array size
-            for(var j = 0; j < 100 - 9; j++){
+            for(var j = 0; j < 100; j++){
                 cells.push(null);
             }
             break;
@@ -32,7 +32,7 @@ function new_board(type) {
 
             }
             //change array size
-            for(var j = 0; j < 25 - 9; j++){
+            for(var j = 0; j < 25; j++){
                 cells.push(null);
             }
             break;

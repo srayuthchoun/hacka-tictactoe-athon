@@ -3,7 +3,7 @@
  */
 
 
-var cells = [null, null, null, null, null, null, null, null, null];
+var cells = [];
 var kirbys = {
     'cutter': {
         src: 'images/cutterkirby.png',
@@ -25,10 +25,40 @@ var kirbys = {
 var player_1;
 var player_2;
 var current_player = null;
+var player1_wins = 0;
+var player2_wins = 0;
 var games_played = 0;
 
-function reset() {
 
+function update_wins() {
+    $('.player1-score .value').text(player1_wins);
+    $('.player2-score .value').text(player2_wins);
+
+}
+
+function game_over() {
+    gameOver = true;
+    if(current_player == player_1) {
+        gameOverModal('player1');
+        player1_wins++;
+    }
+    else {
+        gameOverModal('player2');
+        player2_wins++;
+    }
+    update_wins();
+}
+
+function reset() {
+    cells = [];
+    gameOver = false;
+    player_1 = null;
+    player_2 = null;
+    $('.cell-container').hide();
+    $('#pick-board-size').hide();
+    $('.kirby-select').parent().show();
+    $('.kirby-select').show();
+    $('.gameovermodal').hide();
 }
 
 function findKirby(src) {
@@ -43,8 +73,7 @@ function findKirby(src) {
 }
 
 $(document).ready(function(){
-    $('#pick-board-size').hide();
-    $('.cell-container').hide();
+
 
     $('.kirby-select').click(function(){
         var chosenKirby;
@@ -74,16 +103,9 @@ $(document).ready(function(){
     //reset onclick function
     $('.game-stats').on('click', '.reset', function(){
         console.log("reset");
-        cells = [null, null, null, null, null, null, null, null, null];
-        gameOver = false;
-        ++games_played;
-        player_1 = null;
-        player_2 = null;
-        $('.games-played > .value').text(games_played);
-        $('.cell-container').hide();
-        $('.kirby-select').parent().show();
-        $('.kirby-select').show();
-        $('.game-stats > img').attr('src', 'images/angrykirby.png');
+
+        reset();
+
     });
 
 
@@ -92,7 +114,6 @@ $(document).ready(function(){
         if (!gameOver) {
             var active_cell = $(this);
             player_turn(active_cell); //Function call to process which square has been clicked and store them
-            winConditionV2();
         }
     });
 });
@@ -122,6 +143,8 @@ function player_turn (active_cell){
             console.log('player_1 turn');
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+            winConditionV2();
+
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
@@ -130,6 +153,8 @@ function player_turn (active_cell){
             console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
             cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+            winConditionV2();
+
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);
