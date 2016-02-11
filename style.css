@@ -84,6 +84,10 @@ h3 {
     border: 3px solid #FFF;
 }
 
+.reset:focus, #pick-board-size button{
+    outline: none;
+}
+
 .reset:hover, .board-size:hover {
     animation:rainbow 1.5s infinite;
 }
@@ -146,7 +150,7 @@ h3 {
     z-index: 4;
 }
 
-.board-size, .kirby-select {
+.board-size, .kirby-select, .reset, .cell{
     cursor: pointer;
 }
 

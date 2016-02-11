@@ -69,8 +69,15 @@ $(document).ready(function(){
         $('#pick-board-size').hide();
     });
 
-    $('.reset').click(function(){
-        reset();
+    $('.game-stats').on('click', '.reset', function(){
+        console.log("reset");
+        cells = [null, null, null, null, null, null, null, null, null];
+        gameOver = false;
+        player_1 = null;
+        player_2 = null;
+        $('.cell-container').hide();
+        $('.kirby-select').parent().show();
+        $('.kirby-select').show();
     });
 
 
@@ -93,7 +100,7 @@ function playerStart() {
     }
     else{
         current_player = player_2;  //player_2 starts first if the above conditional is false
-        console.log('player_y goes first');
+        console.log('player_2 goes first');
     }
 }
 //Function checks which player gets to click first
