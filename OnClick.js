@@ -69,6 +69,7 @@ $(document).ready(function(){
         console.log(type);
         new_board(type);
         $('#pick-board-size').hide();
+        playerStart(); //Call function to select which player goes first
     });
     //reset onclick function
     $('.game-stats').on('click', '.reset', function(){
@@ -82,10 +83,11 @@ $(document).ready(function(){
         $('.cell-container').hide();
         $('.kirby-select').parent().show();
         $('.kirby-select').show();
+        $('.game-stats > img').attr('src', 'images/angrykirby.png');
     });
 
 
-    playerStart(); //Call function to select which player goes first
+
     $('.cell-container').on('click', '.cell', function() {
         if (!gameOver) {
             var active_cell = $(this);
@@ -101,12 +103,18 @@ function playerStart() {
     if(random_num==1){  //player_1 starts first if true
         current_player = player_1;
         console.log('player_1 goes first');
+        $('.player-turn > span').text('Player 1 Starts');
+        $('.game-stats > img').attr('src', player_1.src);
     }
     else{
         current_player = player_2;  //player_2 starts first if the above conditional is false
         console.log('player_2 goes first');
+        $('.player-turn > span').text('Player 2 Starts');
+        $('.game-stats > img').attr('src', player_2.src);
     }
+
 }
+
 //Function checks which player gets to click first
 function player_turn (active_cell){
     if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
@@ -115,12 +123,16 @@ function player_turn (active_cell){
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
             current_player = player_2; //Sets current player to player_2
+            $('.player-turn > span').text('Player 2\'s Turn');
+            $('.game-stats > img').attr('src', player_2.src);
         }
         else {
             console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
             cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
             current_player = player_1; //Sets current player to player_2
+            $('.player-turn > span').text('Player 1\'s Turn');
+            $('.game-stats > img').attr('src', player_1.src);
         }
     }
 
