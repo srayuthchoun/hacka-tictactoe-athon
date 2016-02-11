@@ -58,7 +58,12 @@ function winConditionV2() {
                 //set bool gameOver to true
                 gameOver = true;
                 //call function win modal here
-
+                if(current_player == player_1) {
+                    gameOverModal('player1');
+                }
+                else {
+                    gameOverModal('player2');
+                }
                 //exit function
                 return;
             }
@@ -80,7 +85,12 @@ function winConditionV2() {
                     //set bool gameOver to true
                     gameOver = true;
                     //call function win modal here
-
+                    if(current_player == player_1) {
+                        gameOverModal('player1');
+                    }
+                    else {
+                        gameOverModal('player2');
+                    }
                     //exit function
                     return;
                 }
@@ -103,7 +113,12 @@ function winConditionV2() {
                     //set bool gameOver to true
                     gameOver = true;
                     //call function win modal here
-
+                    if(current_player == player_1) {
+                        gameOverModal('player1');
+                    }
+                    else {
+                        gameOverModal('player2');
+                    }
                     //exit function
                     return;
                 }
@@ -130,7 +145,12 @@ function winConditionV2() {
                 //set bool gameOver to true
                 gameOver = true;
                 //call function win modal here
-
+                if(current_player == player_1) {
+                    gameOverModal('player1');
+                }
+                else {
+                    gameOverModal('player2');
+                }
                 //exit function
                 return;
             }
@@ -153,6 +173,6 @@ function winConditionV2() {
         }
     }
     //call function draw modal here
-
+    gameOverModal('draw');
     console.log("It's a draw!");
 }
