@@ -165,8 +165,7 @@ function findKirby(src) {
 }
 
 $(document).ready(function () {
-
-
+    //selection for picking kirby
     $('.kirby-select').click(function () {
         var chosenKirby;
         if ($(this).parent().hasClass('pick-player1')) {
@@ -204,6 +203,7 @@ $(document).ready(function () {
 
     });
 
+    //when user clicks what board size they want
     $('.board-size').click(function () {
         var type = $(this).val();
         console.log(type);
@@ -214,7 +214,6 @@ $(document).ready(function () {
 
     //reset onclick function
     $('.game-stats').on('click', '.reset', function () {
-        console.log("reset");
         reset();
     });
 
@@ -253,64 +252,49 @@ function playerStart() {
 
 //Function checks which player gets to click first
 function player_turn(active_cell) {
+    if (cells[$(active_cell).index()] == null) {
+        if (current_player == player_1) { // checks which player gets to click first
+            if (player_1.abilityActiveState === true) {
+                player_1.ability(active_cell);
+            }
+            else {
+                if (cells[$(active_cell).index()] == null) {
+                    $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
+                    cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+                    winConditionV3(active_cell, toMatch);
 
-
-
-    //Checks to make sure current cell has not been clicked
-    if (current_player == player_1) { // checks which player gets to click first
-
-
-        if (player_1.abilityActiveState === true) {
-            player_1.ability(active_cell);
+                }
+            }
+            current_player = player_2; //Sets current player to player_2
+            $('.player-turn > span').text('Player 2\'s Turn');
+            $('.game-stats > img').attr('src', player_2.src);
         }
         else {
-            if (cells[$(active_cell).index()] == null) {
-                $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
-                cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
-                winConditionV3(active_cell, toMatch);
-
+            if (player_2.abilityActiveState === true) {
+                player_2.ability(active_cell);
             }
+            else {
+                if (cells[$(active_cell).index()] == null) {
+                    $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
+                    cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+                    winConditionV3(active_cell, toMatch);
 
+                }
+            }
+            current_player = player_1; //Sets current player to player_2
+            $('.player-turn > span').text('Player 1\'s Turn');
+            $('.game-stats > img').attr('src', player_1.src);
         }
 
-
-        current_player = player_2; //Sets current player to player_2
-        $('.player-turn > span').text('Player 2\'s Turn');
-        $('.game-stats > img').attr('src', player_2.src);
-
-    }
-    else {
-
-        if (player_2.abilityActiveState === true) {
-            player_2.ability(active_cell);
+        if (current_player.canUseAbility === false) { //makes the ability button grey
+            $('[value="ability"]').removeClass('ability-enabled');
+            $('[value="ability"]').addClass('ability-disabled');
         }
         else {
-            if (cells[$(active_cell).index()] == null) {
-                $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
-                cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
-                winConditionV3(active_cell, toMatch);
-
-            }
+            $('[value="ability"]').removeClass('ability-disabled');
+            $('[value="ability"]').addClass('ability-enabled');
         }
-
-
-        current_player = player_1; //Sets current player to player_2
-        $('.player-turn > span').text('Player 1\'s Turn');
-        $('.game-stats > img').attr('src', player_1.src);
-
-
     }
-
-
-    if (current_player.canUseAbility === false) { //makes the ability button grey
-        $('[value="ability"]').removeClass('ability-enabled');
-        $('[value="ability"]').addClass('ability-disabled');
-    }
-    else {
-        $('[value="ability"]').removeClass('ability-disabled');
-        $('[value="ability"]').addClass('ability-enabled');
-    }
-
 }
 
 
