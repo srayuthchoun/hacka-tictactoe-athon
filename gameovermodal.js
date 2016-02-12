@@ -1,3 +1,5 @@
+
+//shows a modal based on who won
 function gameOverModal(winner) {
     switch(winner) {
         case 'player1':

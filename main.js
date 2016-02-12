@@ -1,9 +1,18 @@
 /**
- *   Created by Srayuth Choun on 2/10/2016.
+ *   Created by STICKY INSERTIONS on 2/10/2016.
  */
 
+//global vars
 var cells = [];
+var player_1;
+var player_2;
+var current_player = null;
+var player1_wins = 0;
+var player2_wins = 0;
+var games_played = 0;
+var toMatch = 0;
 
+//Kirby holds all the different kirby types
 var kirbys = {
     'cutter': {
         src: 'images/cutterkirby.png',
@@ -99,21 +108,14 @@ var kirbys = {
     }
 };
 
-
-var player_1;
-var player_2;
-var current_player = null;
-var player1_wins = 0;
-var player2_wins = 0;
-var games_played = 0;
-var toMatch = 0;
-
+//Updates the score of players
 function update_wins() {
     $('.player1-score .value').text(player1_wins);
     $('.player2-score .value').text(player2_wins);
 
 }
 
+//runs when game is over
 function game_over() {
     gameOver = true;
     if (current_player == player_1) {
@@ -127,6 +129,7 @@ function game_over() {
     update_wins();
 }
 
+//runs when reset button is pressed, resets game state, board
 function reset() {
     cells = [];
     ++games_played;
@@ -153,6 +156,7 @@ function reset() {
 
 }
 
+//searches for the kirby type in object using an src
 function findKirby(src) {
     var foundKirby;
     for (var kirbytype in kirbys) {
@@ -162,6 +166,79 @@ function findKirby(src) {
         }
     }
     return foundKirby;
+}
+
+
+//Function to set which player goes first
+function playerStart() {
+    var random_num = Math.floor((Math.random() * 2) + 1); //Generate a random number either 1 or 2
+    if (random_num == 1) {  //player_1 starts first if true
+        current_player = player_1;
+        console.log('player_1 goes first');
+        $('.player-turn > span').text('Player 1 Starts');
+        $('.game-stats > img').attr('src', player_1.src);
+    }
+    else {
+        current_player = player_2;  //player_2 starts first if the above conditional is false
+        console.log('player_2 goes first');
+        $('.player-turn > span').text('Player 2 Starts');
+        $('.game-stats > img').attr('src', player_2.src);
+    }
+}
+
+//Function checks which player gets to click first
+function player_turn(active_cell) {
+        if (current_player == player_1) { // checks which player gets to click first
+            //user pressed activate ability button, so the next click will trigger ability
+            if (player_1.abilityActiveState === true) {
+                player_1.ability(active_cell);
+                current_player = player_2; //Sets current player to player_2
+                $('.player-turn > span').text('Player 2\'s Turn');
+                $('.game-stats > img').attr('src', player_2.src);
+
+            }
+            else { //ability button wasn't activated
+                if (cells[$(active_cell).index()] === null) {
+                    $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
+                    cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+                    winConditionV3(active_cell, toMatch);
+                    current_player = player_2; //Sets current player to player_2
+                    $('.player-turn > span').text('Player 2\'s Turn');
+                    $('.game-stats > img').attr('src', player_2.src);
+
+
+                }
+            }
+        }
+        else { //current player is player 2
+            if (player_2.abilityActiveState === true) {
+                player_2.ability(active_cell);
+                current_player = player_1; //Sets current player to player_2
+                $('.player-turn > span').text('Player 1\'s Turn');
+                $('.game-stats > img').attr('src', player_1.src);
+            }
+            else {
+                if (cells[$(active_cell).index()] === null) {
+                    $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
+                    cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+                    winConditionV3(active_cell, toMatch);
+                    current_player = player_1; //Sets current player to player_2
+                    $('.player-turn > span').text('Player 1\'s Turn');
+                    $('.game-stats > img').attr('src', player_1.src);
+                }
+            }
+
+        }
+
+        if (current_player.canUseAbility === false) { //makes the ability button grey
+            $('[value="ability"]').removeClass('ability-enabled');
+            $('[value="ability"]').addClass('ability-disabled');
+        }
+        else {
+            $('[value="ability"]').removeClass('ability-disabled');
+            $('[value="ability"]').addClass('ability-enabled');
+        }
+
 }
 
 $(document).ready(function () {
@@ -232,71 +309,6 @@ $(document).ready(function () {
         }
     });
 });
-
-//Function to set which player goes first
-function playerStart() {
-    var random_num = Math.floor((Math.random() * 2) + 1); //Generate a random number either 1 or 2
-    if (random_num == 1) {  //player_1 starts first if true
-        current_player = player_1;
-        console.log('player_1 goes first');
-        $('.player-turn > span').text('Player 1 Starts');
-        $('.game-stats > img').attr('src', player_1.src);
-    }
-    else {
-        current_player = player_2;  //player_2 starts first if the above conditional is false
-        console.log('player_2 goes first');
-        $('.player-turn > span').text('Player 2 Starts');
-        $('.game-stats > img').attr('src', player_2.src);
-    }
-}
-
-//Function checks which player gets to click first
-function player_turn(active_cell) {
-    if (cells[$(active_cell).index()] == null) {
-        if (current_player == player_1) { // checks which player gets to click first
-            if (player_1.abilityActiveState === true) {
-                player_1.ability(active_cell);
-            }
-            else {
-                if (cells[$(active_cell).index()] == null) {
-                    $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
-                    cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
-                    winConditionV3(active_cell, toMatch);
-
-                }
-            }
-            current_player = player_2; //Sets current player to player_2
-            $('.player-turn > span').text('Player 2\'s Turn');
-            $('.game-stats > img').attr('src', player_2.src);
-        }
-        else {
-            if (player_2.abilityActiveState === true) {
-                player_2.ability(active_cell);
-            }
-            else {
-                if (cells[$(active_cell).index()] == null) {
-                    $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
-                    cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
-                    winConditionV3(active_cell, toMatch);
-
-                }
-            }
-            current_player = player_1; //Sets current player to player_2
-            $('.player-turn > span').text('Player 1\'s Turn');
-            $('.game-stats > img').attr('src', player_1.src);
-        }
-
-        if (current_player.canUseAbility === false) { //makes the ability button grey
-            $('[value="ability"]').removeClass('ability-enabled');
-            $('[value="ability"]').addClass('ability-disabled');
-        }
-        else {
-            $('[value="ability"]').removeClass('ability-disabled');
-            $('[value="ability"]').addClass('ability-enabled');
-        }
-    }
-}
-
 
 
 
