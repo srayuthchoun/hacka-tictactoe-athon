@@ -1,4 +1,4 @@
-
+//function dynamically creates a board
 //parameter type tells what kind of board: 3x3, 5x5, 10x10, 15x15
 function new_board(type) {
     $('.cell-container').show();
