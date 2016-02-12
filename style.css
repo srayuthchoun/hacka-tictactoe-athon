@@ -188,7 +188,7 @@ h3 {
     z-index: 4;
 }
 
-.board-size, .kirby-select, .reset, .cell, .ability{
+.board-size, .kirby-select, .reset, .cell, .ability, .ability-enabled{
     cursor: pointer;
 }
 
