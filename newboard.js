@@ -40,7 +40,7 @@ function new_board(type) {
             //create cells
             for(var i = 0; i < 9; i++) {
                 $('.cell-container').append($('<div>').addClass('cell x3'));
-
+                cells.push(null);
             }
             break;
     }

@@ -22,13 +22,14 @@ var kirbys = {
         name: 'Ice Kirby'
     }
 };
+
+
 var player_1;
 var player_2;
 var current_player = null;
 var player1_wins = 0;
 var player2_wins = 0;
 var games_played = 0;
-
 
 function update_wins() {
     $('.player1-score .value').text(player1_wins);
@@ -59,6 +60,9 @@ function reset() {
     $('.kirby-select').parent().show();
     $('.kirby-select').show();
     $('.gameovermodal').hide();
+    $('.game-stats > img').attr('src', "images/angrykirby.png");
+    $('.player-turn > span').text('');
+    $('#intro-sound').get(0).play();
 }
 
 function findKirby(src) {
@@ -73,7 +77,7 @@ function findKirby(src) {
 }
 
 $(document).ready(function(){
-
+    $('#intro-sound').get(0).play();
 
     $('.kirby-select').click(function(){
         var chosenKirby;
@@ -83,14 +87,16 @@ $(document).ready(function(){
             //remove the chosen kirby so that next player can't select it
             $("[src='" + $(this).find('img').attr('src') + "']").parent().hide();
             console.log("player 1 is ", player_1);
+            $('#player1-sound').get(0).play();
+
         }
         else {
             player_2 = kirbys[findKirby($(this).find('img').attr('src'))];
             $('#pick-board-size').show();
             console.log("player 1 is ", player_2);
+            $('#player2-sound').get(0).play();
         }
         $(this).parent().hide();
-
     });
 
     $('.board-size').click(function(){
@@ -100,15 +106,12 @@ $(document).ready(function(){
         $('#pick-board-size').hide();
         playerStart(); //Call function to select which player goes first
     });
+
     //reset onclick function
     $('.game-stats').on('click', '.reset', function(){
         console.log("reset");
-
         reset();
-
     });
-
-
 
     $('.cell-container').on('click', '.cell', function() {
         if (!gameOver) {
@@ -133,7 +136,6 @@ function playerStart() {
         $('.player-turn > span').text('Player 2 Starts');
         $('.game-stats > img').attr('src', player_2.src);
     }
-
 }
 
 //Function checks which player gets to click first
@@ -142,25 +144,24 @@ function player_turn (active_cell){
         if (current_player == player_1) { // checks which player gets to click first
             console.log('player_1 turn');
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
-            cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+            cells[$(active_cell).index()] = player_1.name; //adds player_1 click to the array
             winConditionV2();
-
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
+
         }
         else {
             console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
-            cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+            cells[$(active_cell).index()] = player_2.name; //adds player_2 click to the array
             winConditionV2();
-
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);
+
         }
     }
-
     console.log('active cell: ' + $(active_cell).index());
     console.log('cells array: ', cells);
 }

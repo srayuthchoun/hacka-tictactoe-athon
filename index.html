@@ -22,7 +22,7 @@
         <div class="player2-score"><span class="label">Player 2:</span><span class="value">0</span></div>
         <div class="games-played"><span class="label">Games Played:</span><span class="value">0</span></div>
         <button class="reset">Restart Game</button>
-
+        <audio id="intro-sound" src="audio/kirby_chant.wav"></audio>
 
 
     </div>
@@ -42,15 +42,16 @@
             <div class="kirby-select"><img src="images/firekirby.png"></div>
             <div class="kirby-select"><img src="images/icekirby.png"></div>
             <div class="kirby-select"><img src="images/bombkirby.png"></div>
+            <audio id="player1-sound" src="audio/kirby_hi_player1.mp3"></audio>
         </div>
         <div class="pick-player2"><h2>Player 2 Character Select</h2>
             <div class="kirby-select"><img src="images/cutterkirby.png"></div>
             <div class="kirby-select"><img src="images/firekirby.png"></div>
             <div class="kirby-select"><img src="images/icekirby.png"></div>
             <div class="kirby-select"><img src="images/bombkirby.png"></div>
+            <audio id="player2-sound" src="audio/kirby_hi_player2.mp3"></audio>
         </div>
     </div>
-
 </div>
 
 <div id="player1-win" class="gameovermodal">
@@ -64,7 +65,9 @@
 <div id="draw" class="gameovermodal">
     <h3>It's a draw!</h3>
     <div><img src="images/sleepkirby.png"></div>
+    <audio id="draw-sound" src="audio/kirby_draw_scream.mp3"></audio>
 </div>
+<audio id="winner-sound" src="audio/kirby_victory_dance.mp3"></audio>
 
 </body>
 </html>
