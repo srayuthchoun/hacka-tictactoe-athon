@@ -8,13 +8,13 @@ var kirbys = {
     'cutter': {
         src: 'images/cutterkirby.png',
         name: 'Cutter Kirby',
-        ability: function(cell_clicked) {
+        ability: function (cell_clicked) {
             console.log(lengthOfSide);
             var cell_index = $(cell_clicked).index();
             var row = Math.floor(cell_index / lengthOfSide) + 1;
             var firstCellInRow = lengthOfSide * (row - 1);
             var lastCellInRow = (lengthOfSide * row) - 1;
-            for(var i = firstCellInRow; i <= lastCellInRow; i++) {
+            for (var i = firstCellInRow; i <= lastCellInRow; i++) {
                 cells[i] = null;
                 $('.cell').eq(i).find('img').remove();
             }
@@ -28,7 +28,7 @@ var kirbys = {
     'fire': {
         src: 'images/firekirby.png',
         name: 'Fire Kirby',
-        ability: function(cell_clicked) {
+        ability: function (cell_clicked) {
             var cell_index = $(cell_clicked).index();
             $(cell_clicked).find('img').remove();
             cells[cell_index] = null;
@@ -98,6 +98,8 @@ var kirbys = {
 
     }
 };
+
+
 var player_1;
 var player_2;
 var current_player = null;
@@ -105,7 +107,6 @@ var player1_wins = 0;
 var player2_wins = 0;
 var games_played = 0;
 var toMatch = 0;
-
 
 function update_wins() {
     $('.player1-score .value').text(player1_wins);
@@ -115,7 +116,7 @@ function update_wins() {
 
 function game_over() {
     gameOver = true;
-    if(current_player == player_1) {
+    if (current_player == player_1) {
         gameOverModal('player1');
         player1_wins++;
     }
@@ -141,15 +142,21 @@ function reset() {
     $('.kirby-select').parent().show();
     $('.kirby-select').show();
     $('.gameovermodal').hide();
+
+    $('.game-stats > img').attr('src', "images/angrykirby.png");
+    $('.player-turn > span').text('');
+
+
     $('[value="ability"]').removeClass('ability-disabled');
     $('[value="ability"]').addClass('ability-enabled');
+
 
 }
 
 function findKirby(src) {
     var foundKirby;
-    for(var kirbytype in kirbys) {
-        if(src === kirbys[kirbytype].src) {
+    for (var kirbytype in kirbys) {
+        if (src === kirbys[kirbytype].src) {
             foundKirby = kirbytype;
             console.log("found kirby! it's " + kirbytype);
         }
@@ -157,65 +164,68 @@ function findKirby(src) {
     return foundKirby;
 }
 
-$(document).ready(function(){
-
-
-    $('.kirby-select').click(function(){
+$(document).ready(function () {
+    //selection for picking kirby
+    $('.kirby-select').click(function () {
         var chosenKirby;
-        if($(this).parent().hasClass('pick-player1')) {
+        if ($(this).parent().hasClass('pick-player1')) {
             chosenKirby = findKirby($(this).find('img').attr('src'));
             player_1 = kirbys[chosenKirby];
             //remove the chosen kirby so that next player can't select it
             $("[src='" + $(this).find('img').attr('src') + "']").parent().hide();
             console.log("player 1 is ", player_1);
+            $('#player1-sound').get(0).play();
+
         }
         else {
             player_2 = kirbys[findKirby($(this).find('img').attr('src'))];
             $('#pick-board-size').show();
             console.log("player 1 is ", player_2);
+            $('#player2-sound').get(0).play();
         }
         $(this).parent().hide();
+
     });
 
-    $('.kirby-select').mouseover(function(){
-        if($(this).find('img').attr('src') == kirbys.cutter.src) {
+    $('.kirby-select').mouseover(function () {
+        if ($(this).find('img').attr('src') == kirbys.cutter.src) {
             $('.kirby-ability-desc').text("Cutter Kirby deletes all the Kirbys in a row that you click on.");
         }
-        else if($(this).find('img').attr('src') == kirbys.fire.src) {
+        else if ($(this).find('img').attr('src') == kirbys.fire.src) {
             $('.kirby-ability-desc').text("Fire Kirby deletes a single Kirby on the cell you click on.");
         }
-        else if($(this).find('img').attr('src') == kirbys.ice.src) {
+        else if ($(this).find('img').attr('src') == kirbys.ice.src) {
             $('.kirby-ability-desc').text("Ice Kirby disables a single cell you click on from being used.");
         }
-        else if($(this).find('img').attr('src') == kirbys.bomb.src) {
+        else if ($(this).find('img').attr('src') == kirbys.bomb.src) {
             $('.kirby-ability-desc').text("Bomb Kirby deletes all Kirbys on the spaces next to and including the cell you click on.");
         }
+
     });
 
-    $('.board-size').click(function(){
+    //when user clicks what board size they want
+    $('.board-size').click(function () {
         var type = $(this).val();
         console.log(type);
         new_board(type);
         $('#pick-board-size').hide();
         playerStart(); //Call function to select which player goes first
     });
+
     //reset onclick function
-    $('.game-stats').on('click', '.reset', function(){
-        console.log("reset");
-
+    $('.game-stats').on('click', '.reset', function () {
         reset();
-
     });
 
-    $('[value="ability"]').click(function() {
-        if($(this).hasClass('ability-enabled')) {
+
+    $('[value="ability"]').click(function () {
+        if ($(this).hasClass('ability-enabled')) {
             current_player.abilityActiveState = true;
         }
     });
 
 
-
-    $('.cell-container').on('click', '.cell', function() {
+    $('.cell-container').on('click', '.cell', function () {
         if (!gameOver) {
             var active_cell = $(this);
             player_turn(active_cell); //Function call to process which square has been clicked and store them
@@ -226,74 +236,64 @@ $(document).ready(function(){
 //Function to set which player goes first
 function playerStart() {
     var random_num = Math.floor((Math.random() * 2) + 1); //Generate a random number either 1 or 2
-    if(random_num==1){  //player_1 starts first if true
+    if (random_num == 1) {  //player_1 starts first if true
         current_player = player_1;
         console.log('player_1 goes first');
         $('.player-turn > span').text('Player 1 Starts');
         $('.game-stats > img').attr('src', player_1.src);
     }
-    else{
+    else {
         current_player = player_2;  //player_2 starts first if the above conditional is false
         console.log('player_2 goes first');
         $('.player-turn > span').text('Player 2 Starts');
         $('.game-stats > img').attr('src', player_2.src);
     }
-
 }
 
 //Function checks which player gets to click first
-function player_turn (active_cell){
-
-
-
-     //Checks to make sure current cell has not been clicked
+function player_turn(active_cell) {
+    if (cells[$(active_cell).index()] == null) {
         if (current_player == player_1) { // checks which player gets to click first
-
-            if(player_1.abilityActiveState === true) {
+            if (player_1.abilityActiveState === true) {
                 player_1.ability(active_cell);
             }
             else {
-                if(cells[$(active_cell).index()] == null) {
+                if (cells[$(active_cell).index()] == null) {
                     $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
                     cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
                     winConditionV3(active_cell, toMatch);
 
                 }
-
             }
-
-
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
         }
         else {
-            if(player_2.abilityActiveState === true) {
+            if (player_2.abilityActiveState === true) {
                 player_2.ability(active_cell);
             }
             else {
-                if(cells[$(active_cell).index()] == null) {
+                if (cells[$(active_cell).index()] == null) {
                     $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
                     cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
                     winConditionV3(active_cell, toMatch);
 
                 }
             }
-
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);
+        }
 
-
-    }
-
-    if(current_player.canUseAbility === false) { //makes the ability button grey
-        $('[value="ability"]').removeClass('ability-enabled');
-        $('[value="ability"]').addClass('ability-disabled');
-    }
-    else {
-        $('[value="ability"]').removeClass('ability-disabled');
-        $('[value="ability"]').addClass('ability-enabled');
+        if (current_player.canUseAbility === false) { //makes the ability button grey
+            $('[value="ability"]').removeClass('ability-enabled');
+            $('[value="ability"]').addClass('ability-disabled');
+        }
+        else {
+            $('[value="ability"]').removeClass('ability-disabled');
+            $('[value="ability"]').addClass('ability-enabled');
+        }
     }
 }
 
