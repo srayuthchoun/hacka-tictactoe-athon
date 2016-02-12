@@ -117,8 +117,8 @@ var kirbys = {
 
 //Updates the score of players
 function update_wins() {
-    $('.player1-score .value').text(player1_wins);
-    $('.player2-score .value').text(player2_wins);
+    $('.player1-score > .value').text(player1_wins);
+    $('.player2-score > .value').text(player2_wins);
 
 }
 
