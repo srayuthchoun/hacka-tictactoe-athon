@@ -41,11 +41,58 @@ var kirbys = {
     },
     'bomb': {
         src: 'images/bombkirby.png',
-        name: 'Bomb Kirby'
+        name: 'Bomb Kirby',
+        ability: function (cell_clicked) {
+            var cell_index = $(cell_clicked).index();
+            //current
+            $('.cell').eq(cell_index).find('img').remove();
+            cells[cell_index] = null;
+            //top:
+            var top_cell = cell_index - lengthOfSide;
+            if (cells[top_cell] !== undefined) {
+                $('.cell').eq(top_cell).find('img').remove();
+                cells[top_cell] = null;
+            }
+            //bottom:
+            var bottom_cell = cell_index + lengthOfSide;
+            if (cells[bottom_cell] !== undefined) {
+                $('.cell').eq(bottom_cell).find('img').remove();
+                cells[bottom_cell] = null;
+            }
+            //left:
+            var left_cell = cell_index + 1;
+            if (cells[left_cell] !== undefined) {
+                $('.cell').eq(left_cell).find('img').remove();
+                cells[left_cell] = null;
+            }
+            //right:
+            var right_cell = cell_index - 1;
+            if (cells[right_cell] !== undefined) {
+                $('.cell').eq(right_cell).find('img').remove();
+                cells[right_cell] = null;
+            }
+
+            this.canUseAbility = false;
+            this.abilityActiveState = false;
+
+        },
+        canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
+        abilityActiveState: false //this is if the button was clicked and is ready to use
+
     },
     'ice': {
         src: 'images/icekirby.png',
-        name: 'Ice Kirby'
+        name: 'Ice Kirby',
+        ability: function (cell_clicked) {
+            var cell_index = $(cell_clicked).index();
+
+            this.canUseAbility = false;
+            this.abilityActiveState = false;
+
+        },
+        canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
+        abilityActiveState: false //this is if the button was clicked and is ready to use
+
     }
 };
 var player_1;
