@@ -29,6 +29,7 @@ var kirbys = {
             }
             this.canUseAbility = false;
             this.abilityActiveState = false;
+            $('.cell').removeClass('cell-ability');
 
         },
         canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
@@ -44,6 +45,8 @@ var kirbys = {
 
             this.canUseAbility = false;
             this.abilityActiveState = false;
+            $('.cell').removeClass('cell-ability');
+
         },
         canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
         abilityActiveState: false //this is if the button was clicked and is ready to use
@@ -83,6 +86,8 @@ var kirbys = {
 
             this.canUseAbility = false;
             this.abilityActiveState = false;
+            $('.cell').removeClass('cell-ability');
+
 
         },
         canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
@@ -100,6 +105,8 @@ var kirbys = {
 
             this.canUseAbility = false;
             this.abilityActiveState = false;
+            $('.cell').removeClass('cell-ability');
+
 
         },
         canUseAbility: true, //this is the button's state: true means it's green, false means it's grey
@@ -110,8 +117,8 @@ var kirbys = {
 
 //Updates the score of players
 function update_wins() {
-    $('.player1-score .value').text(player1_wins);
-    $('.player2-score .value').text(player2_wins);
+    $('.player1-score > .value').text(player1_wins);
+    $('.player2-score > .value').text(player2_wins);
 
 }
 
@@ -298,6 +305,7 @@ $(document).ready(function () {
     $('[value="ability"]').click(function () {
         if ($(this).hasClass('ability-enabled')) {
             current_player.abilityActiveState = true;
+            $('.cell').addClass('cell-ability');
         }
     });
 
