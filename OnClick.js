@@ -86,6 +86,9 @@ var kirbys = {
         ability: function (cell_clicked) {
             var cell_index = $(cell_clicked).index();
 
+            $(cell_clicked).html('<img class="ice" src="images/iceblock.jpg">');
+            cells[cell_index] = 'ice';
+
             this.canUseAbility = false;
             this.abilityActiveState = false;
 

@@ -294,6 +294,12 @@ h2 {
     width: 100%;
 }
 
+.ice {
+    border-radius: 15px;
+    width: 104%;
+    height: 99%;
+}
+
 .cell-ability {
     background-color: black;
 }
