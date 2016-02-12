@@ -194,7 +194,12 @@ function winConditionV3(active_cell, toMatch) {
         ++right;
     }
     if (matches >= (toMatch - 1)) {
-        console.log(current_player.name, "wins!");
+        if(current_player == player_1) {
+            gameOverModal('player1');
+        }
+        else {
+            gameOverModal('player2');
+        }
         gameOver = true;
         return;
     }
@@ -224,7 +229,12 @@ function winConditionV3(active_cell, toMatch) {
         bottom += lengthOfSide;
     }
     if (matches >= (toMatch - 1)) {
-        console.log(current_player.name, "wins!");
+        if(current_player == player_1) {
+            gameOverModal('player1');
+        }
+        else {
+            gameOverModal('player2');
+        }
         gameOver = true;
         return;
     }
@@ -254,7 +264,12 @@ function winConditionV3(active_cell, toMatch) {
         botRight += (lengthOfSide + 1);
     }
     if (matches >= (toMatch - 1)) {
-        console.log(current_player.name, "wins!");
+        if(current_player == player_1) {
+            gameOverModal('player1');
+        }
+        else {
+            gameOverModal('player2');
+        }
         gameOver = true;
         return;
     }
@@ -271,11 +286,12 @@ function winConditionV3(active_cell, toMatch) {
         }
         topRight -= (lengthOfSide - 1);
     }
+    console.log(matches);
     same = true;
     //bot left side checker
     var botLeft = activeIndex;
     while (same) {
-        if (cells[botLeft] == cells[botLeft + (lengthOfSide - 1)] && ((lengthOfSide - 1) % lengthOfSide) != (lengthOfSide - 1)) {
+        if (cells[botLeft] == cells[botLeft + (lengthOfSide - 1)] && ((botLeft + (lengthOfSide - 1)) % lengthOfSide) != (lengthOfSide - 1)) {
             ++matches;
         }
         else {
@@ -283,10 +299,21 @@ function winConditionV3(active_cell, toMatch) {
         }
         botLeft += (lengthOfSide - 1);
     }
+    console.log(matches);
     if (matches >= (toMatch - 1)) {
-        console.log(current_player.name, "wins!");
+        if(current_player == player_1) {
+            gameOverModal('player1');
+        }
+        else {
+            gameOverModal('player2');
+        }
         gameOver = true;
         return;
     }
-
+    for (var i = 0; i < cells.length; i++) {
+        if (cells[i] == null) {
+            return;
+        }
+    }
+    gameOverModal('draw');
 }
