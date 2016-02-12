@@ -13,7 +13,7 @@ function gameOverModal(winner) {
         default:
             //show "draw"
             $('#draw').show();
-            $('#draw-sound').get(0).play();
+            $('#winner-sound').get(0).play();
             break;
     }
 }
