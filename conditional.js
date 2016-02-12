@@ -161,16 +161,14 @@ function winConditionV2() {
 
 
 
-//extra dynamic conditional function for winning by checking given in a row
+//extra dynamic conditional function for winning by checking surrounding matches around clicked index
 function winConditionV3(active_cell, toMatch) {
     var lengthOfSide = Math.sqrt(cells.length);
     var matches = 0;
     var same = true;
     var activeIndex = active_cell.index();
 
-    console.log("Active Index:", activeIndex);
-    console.log("Amount to match:", toMatch);
-    //left side checker
+    //left side checker, moves to left until it stops matching
     var left = activeIndex;
     while (same) {
         if (cells[left] == cells[left - 1] && ((left - 1) % lengthOfSide) != (lengthOfSide - 1)) {
@@ -182,7 +180,7 @@ function winConditionV3(active_cell, toMatch) {
         --left;
     }
     same = true;
-    //right side checker
+    //right side checker, moves right until it stops matching
     var right = activeIndex;
     while (same) {
         if (cells[right] == cells[right + 1] && ((right + 1) % lengthOfSide) != (0)) {
@@ -193,6 +191,7 @@ function winConditionV3(active_cell, toMatch) {
         }
         ++right;
     }
+    // if the matches in this row is >= how many you needed to match, then victory
     if (matches >= (toMatch - 1)) {
         if(current_player == player_1) {
             gameOverModal('player1');
@@ -203,9 +202,10 @@ function winConditionV3(active_cell, toMatch) {
         gameOver = true;
         return;
     }
+    //reset matches so we can check a different match line
     matches = 0;
     same = true;
-    //top side checker
+    //top side checker, moves up until it stops matching
     var top = activeIndex;
     while (same) {
         if (cells[top] == cells[top - lengthOfSide] && cells[top - lengthOfSide] != null) {
@@ -217,7 +217,7 @@ function winConditionV3(active_cell, toMatch) {
         top -= lengthOfSide;
     }
     same = true;
-    //bottom side checker
+    //bottom side checker, moves down until it stops matching
     var bottom = activeIndex;
     while (same) {
         if (cells[bottom] == cells[bottom + lengthOfSide] && cells[bottom + lengthOfSide]  != null) {
@@ -228,6 +228,7 @@ function winConditionV3(active_cell, toMatch) {
         }
         bottom += lengthOfSide;
     }
+    // if the matches in this column is >= how many you needed to match, then victory
     if (matches >= (toMatch - 1)) {
         if(current_player == player_1) {
             gameOverModal('player1');
@@ -238,9 +239,10 @@ function winConditionV3(active_cell, toMatch) {
         gameOver = true;
         return;
     }
+    //reset matches so we can check a different match line
     matches = 0;
     same = true;
-    //top left diagonal checker
+    //top left diagonal checker, moves diagonally up-left until it stops matching
     var topLeft = activeIndex;
     while (same) {
         if (cells[topLeft] == cells[topLeft - (lengthOfSide + 1)] && ((topLeft - (lengthOfSide + 1)) % lengthOfSide) != (lengthOfSide - 1)) {
@@ -252,7 +254,7 @@ function winConditionV3(active_cell, toMatch) {
         topLeft -= (lengthOfSide + 1);
     }
     same = true;
-    //bot right side checker
+    //bot right side checker, moves diagonally down-right until it stops matching
     var botRight = activeIndex;
     while (same) {
         if (cells[botRight] == cells[botRight + (lengthOfSide + 1)] && ((lengthOfSide + 1) % lengthOfSide) != 0) {
@@ -263,6 +265,7 @@ function winConditionV3(active_cell, toMatch) {
         }
         botRight += (lengthOfSide + 1);
     }
+    // if the matches in this diagonal is >= how many you needed to match, then victory
     if (matches >= (toMatch - 1)) {
         if(current_player == player_1) {
             gameOverModal('player1');
@@ -273,9 +276,10 @@ function winConditionV3(active_cell, toMatch) {
         gameOver = true;
         return;
     }
+    //reset matches so we can check a different match line
     matches = 0;
     same = true;
-    //top right diagonal checker
+    //top right diagonal checker, moves diagonally up-right until it stops matching
     var topRight = activeIndex;
     while (same) {
         if (cells[topRight] == cells[topRight - (lengthOfSide - 1)] && ((topRight - (lengthOfSide - 1)) % lengthOfSide) != 0) {
@@ -286,9 +290,8 @@ function winConditionV3(active_cell, toMatch) {
         }
         topRight -= (lengthOfSide - 1);
     }
-    console.log(matches);
     same = true;
-    //bot left side checker
+    //bot left side checker, moves diagonally down-left until it stops matching
     var botLeft = activeIndex;
     while (same) {
         if (cells[botLeft] == cells[botLeft + (lengthOfSide - 1)] && ((botLeft + (lengthOfSide - 1)) % lengthOfSide) != (lengthOfSide - 1)) {
@@ -299,7 +302,7 @@ function winConditionV3(active_cell, toMatch) {
         }
         botLeft += (lengthOfSide - 1);
     }
-    console.log(matches);
+    // if the matches in this diagonal is >= how many you needed to match, then victory
     if (matches >= (toMatch - 1)) {
         if(current_player == player_1) {
             gameOverModal('player1');
@@ -310,6 +313,7 @@ function winConditionV3(active_cell, toMatch) {
         gameOver = true;
         return;
     }
+    //for loop to check every cell in array, if none are empty then it's a draw!
     for (var i = 0; i < cells.length; i++) {
         if (cells[i] == null) {
             return;

@@ -39,7 +39,7 @@ function update_wins() {
 
 function game_over() {
     gameOver = true;
-    if(current_player == player_1) {
+    if (current_player == player_1) {
         gameOverModal('player1');
         player1_wins++;
     }
@@ -67,8 +67,8 @@ function reset() {
 
 function findKirby(src) {
     var foundKirby;
-    for(var kirbytype in kirbys) {
-        if(src === kirbys[kirbytype].src) {
+    for (var kirbytype in kirbys) {
+        if (src === kirbys[kirbytype].src) {
             foundKirby = kirbytype;
             console.log("found kirby! it's " + kirbytype);
         }
@@ -76,12 +76,11 @@ function findKirby(src) {
     return foundKirby;
 }
 
-$(document).ready(function(){
-
-
-    $('.kirby-select').click(function(){
+$(document).ready(function () {
+    //selection for picking kirby
+    $('.kirby-select').click(function () {
         var chosenKirby;
-        if($(this).parent().hasClass('pick-player1')) {
+        if ($(this).parent().hasClass('pick-player1')) {
             chosenKirby = findKirby($(this).find('img').attr('src'));
             player_1 = kirbys[chosenKirby];
             //remove the chosen kirby so that next player can't select it
@@ -97,24 +96,22 @@ $(document).ready(function(){
 
     });
 
-    $('.board-size').click(function(){
+    //when user clicks what board size they want
+    $('.board-size').click(function () {
         var type = $(this).val();
         console.log(type);
         new_board(type);
         $('#pick-board-size').hide();
         playerStart(); //Call function to select which player goes first
     });
+
     //reset onclick function
-    $('.game-stats').on('click', '.reset', function(){
-        console.log("reset");
-
+    $('.game-stats').on('click', '.reset', function () {
         reset();
-
     });
 
 
-
-    $('.cell-container').on('click', '.cell', function() {
+    $('.cell-container').on('click', '.cell', function () {
         if (!gameOver) {
             var active_cell = $(this);
             player_turn(active_cell); //Function call to process which square has been clicked and store them
@@ -125,13 +122,13 @@ $(document).ready(function(){
 //Function to set which player goes first
 function playerStart() {
     var random_num = Math.floor((Math.random() * 2) + 1); //Generate a random number either 1 or 2
-    if(random_num==1){  //player_1 starts first if true
+    if (random_num == 1) {  //player_1 starts first if true
         current_player = player_1;
         console.log('player_1 goes first');
         $('.player-turn > span').text('Player 1 Starts');
         $('.game-stats > img').attr('src', player_1.src);
     }
-    else{
+    else {
         current_player = player_2;  //player_2 starts first if the above conditional is false
         console.log('player_2 goes first');
         $('.player-turn > span').text('Player 2 Starts');
@@ -141,21 +138,19 @@ function playerStart() {
 }
 
 //Function checks which player gets to click first
-function player_turn (active_cell){
-    if(cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
+function player_turn(active_cell) {
+    if (cells[$(active_cell).index()] == null) { //Checks to make sure current cell has not been clicked
         if (current_player == player_1) { // checks which player gets to click first
-            console.log('player_1 turn');
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
-            cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
+            cells[$(active_cell).index()] = player_1.name; //adds player_1 click to the array
             winConditionV3(active_cell, toMatch);
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
         }
         else {
-            console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
-            cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
+            cells[$(active_cell).index()] = player_2.name; //adds player_2 click to the array
             winConditionV3(active_cell, toMatch);
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
