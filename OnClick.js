@@ -28,6 +28,7 @@ var current_player = null;
 var player1_wins = 0;
 var player2_wins = 0;
 var games_played = 0;
+var toMatch = 0;
 
 
 function update_wins() {
@@ -51,9 +52,12 @@ function game_over() {
 
 function reset() {
     cells = [];
+    ++games_played;
+    $('.games-played > .value').text(games_played);
     gameOver = false;
     player_1 = null;
     player_2 = null;
+    toMatch = 0;
     $('.cell-container').hide();
     $('#pick-board-size').hide();
     $('.kirby-select').parent().show();
@@ -143,7 +147,7 @@ function player_turn (active_cell){
             console.log('player_1 turn');
             $(active_cell).append("<img src='" + player_1.src + "'>"); //adds player_1 image to the selected div
             cells[$(active_cell).index()] = player_1; //adds player_1 click to the array
-            winConditionV3(active_cell, 5);
+            winConditionV3(active_cell, toMatch);
             current_player = player_2; //Sets current player to player_2
             $('.player-turn > span').text('Player 2\'s Turn');
             $('.game-stats > img').attr('src', player_2.src);
@@ -152,7 +156,7 @@ function player_turn (active_cell){
             console.log('player_2 turn');
             $(active_cell).append("<img src='" + player_2.src + "'>"); //adds player_2 image to the selected div
             cells[$(active_cell).index()] = player_2; //adds player_2 click to the array
-            winConditionV3(active_cell, 5);
+            winConditionV3(active_cell, toMatch);
             current_player = player_1; //Sets current player to player_2
             $('.player-turn > span').text('Player 1\'s Turn');
             $('.game-stats > img').attr('src', player_1.src);
