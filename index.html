@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kirby Fight!</title>
+    <link href='https://fonts.googleapis.com/css?family=Sniglet:400,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="newboard.js"></script>
+    <script src="gameovermodal.js"></script>
+    <script src="conditional.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+<div id="main-container">
+    <div class="game-stats">
+        <h1>Kirby Fight!</h1>
+        <h3>A Kirby Tic-Tac-Toe Game</h3>
+        <img src="images/angrykirby.png">
+        <div class="player-turn"><span></span></div>
+        <div class="player1-score"><span class="label">Player 1:</span><span class="value">0</span></div>
+        <div class="player2-score"><span class="label">Player 2:</span><span class="value">0</span></div>
+        <div class="games-played"><span class="label">Games Played:</span><span class="value">0</span></div>
+        <button class="ability-enabled" value="ability">Use Ability</button>
+        <button class="reset">Restart Game</button>
+    </div>
+    <div class="cell-container">
+
+    </div>
+
+    <div class="settings-container">
+        <div id="pick-board-size"><h2>Pick a Board Size</h2>
+            <button class="board-size" value="x3-board">3x3</button>
+            <button class="board-size" value="x5-board">5x5</button>
+            <button class="board-size" value="x10-board">10x10</button>
+            <button class="board-size" value="x15-board">15x15</button>
+        </div>
+        <div class="pick-player1"><h2>Player 1 Character Select</h2>
+            <div class="kirby-select"><img src="images/cutterkirby.png"></div>
+            <div class="kirby-select"><img src="images/firekirby.png"></div>
+            <div class="kirby-select"><img src="images/icekirby.png"></div>
+            <div class="kirby-select"><img src="images/bombkirby.png"></div>
+
+            <audio id="player1-sound" src="audio/kirby_hi_player1.mp3"></audio>
+
+            <div class="kirby-ability-desc">Each kirby has a different ability that you can use once in a game.
+            Use the "ability" button then click on the board to use it!</div>
+
+        </div>
+        <div class="pick-player2"><h2>Player 2 Character Select</h2>
+            <div class="kirby-select"><img src="images/cutterkirby.png"></div>
+            <div class="kirby-select"><img src="images/firekirby.png"></div>
+            <div class="kirby-select"><img src="images/icekirby.png"></div>
+            <div class="kirby-select"><img src="images/bombkirby.png"></div>
+
+            <audio id="player2-sound" src="audio/kirby_hi_player2.mp3"></audio>
+
+            <div class="kirby-ability-desc">Each kirby has a different ability that you can use once in a game.
+                Use the "ability" button then click on the board to use it!</div>
+
+        </div>
+    </div>
+</div>
+
+<div id="player1-win" class="gameovermodal">
+    <h3>Player 1 Wins!</h3>
+    <img src="images/victorykirby.gif">
+</div>
+<div id="player2-win" class="gameovermodal">
+    <h3>Player 2 Wins!</h3>
+    <img src="images/victorykirby.gif">
+</div>
+<div id="draw" class="gameovermodal">
+    <h3>It's a draw!</h3>
+    <div><img src="images/sleepkirby.png"></div>
+</div>
+<audio id="winner-sound" src="audio/kirby_victory_dance.mp3"></audio>
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+body {
+    background-size: 120px;
+    background-image: url('images/kirby_bg_tp.png');
+    background-color: #ffe464;
+    font-size: 0;
+}
+
+#main-container {
+    margin: auto;
+    width: 70%;
+
+}
+
+.game-stats {
+    float: left;
+    width: 30%;
+    display: inline-block;
+    margin-right: 3%;
+}
+
+.game-stats img {
+    height: 150px;
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: Sniglet, sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #324d8f;
+    text-shadow: 2px 2px #FFF;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #427BC7;
+    margin-top: 0;
+}
+
+.player1-score span, .player2-score span, .player-turn, .games-played span {
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #324d8f;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.player1-score span, .player2-score span {
+    width: 50%;
+}
+
+.games-played .label {
+    width: 70%;
+}
+
+.games-played .value {
+    width: 30%;
+}
+
+.player-turn {
+    text-align: center;
+    width: 100%;
+    margin: 20px 0 0 0;
+    color: #619416;
+}
+
+.label {
+    text-align: left;
+}
+.value {
+    text-align: right;
+    padding: 0 20px;
+}
+
+.reset {
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+    background-color: #F1428F;
+
+}
+
+.ability-enabled {
+    background-color: #86C429;
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.ability-disabled {
+    background-color: #888;
+    cursor: auto;
+    width: 100%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.reset:focus, #pick-board-size button, .ability-enabled:focus{
+    outline: none;
+}
+
+.reset:hover, .board-size:hover, .ability-enabled:hover {
+    animation:rainbow 1.5s infinite;
+}
+
+@-webkit-keyframes rainbow {
+    0% {background-color: #DB4040;}
+    10% {background-color: #FA9937;}
+    20% {background-color: #F5E589;}
+    30% {background-color: #99D65C;}
+    40% {background-color: #3FBF50;}
+    50% {background-color: #55C98F;}
+    60% {background-color: #3FDDE8;}
+    70% {background-color: #2D7ECF;}
+    80% {background-color: #3434AD;}
+    90% {background-color: #7D3CBD;}
+    100% {background-color: #F1428F;}
+}
+
+.cell-container {
+    display: inline-block;
+    float: left;
+    background-color: #324d8f;
+    width: 65%;
+    padding: 3px;
+    border-radius: 15px;
+    display: none;
+}
+
+.settings-container {
+    display: inline-block;
+    float: left;
+    width: 65%;
+    position: relative;
+}
+
+
+
+#pick-board-size, .pick-player1, .pick-player2 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(#eefbfc, #cbe1ea);
+    border: 4px solid #324d8f;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#pick-board-size {
+    z-index: 2;
+    display: none;
+}
+
+.pick-player2 {
+    z-index: 3;
+}
+
+.pick-player1 {
+    z-index: 4;
+}
+
+.board-size, .kirby-select, .reset, .cell, .ability{
+    cursor: pointer;
+}
+
+.board-size {
+    width: 47.5%;
+    padding: 10px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 1%;
+    box-sizing: border-box;
+    color: #FFF;
+    background-color: #86C429;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+}
+
+.kirby-select {
+    width: 20%;
+    padding-bottom: 20%;
+    background-color: #86C429;
+    display: inline-block;
+    position: relative;
+    border-radius: 100%;
+    border: 3px solid #FFF;
+    margin: 1%;
+
+}
+
+.kirby-select:hover {
+    animation:rainbow 1.5s infinite;
+
+}
+
+.kirby-select img {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.kirby-ability-desc {
+    width: 100%;
+    height: 120px;
+    padding: 20px;
+    font-family: Sniglet, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 5px 10px 5px 0;
+    box-sizing: border-box;
+    color: #FFF;
+    border-radius: 15px;
+    border: 3px solid #FFF;
+    background-color: #F1428F;
+}
+
+
+h2 {
+    font-family: Sniglet, sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #324d8f;
+    margin: 0 0 10px 1%;
+}
+
+.cell {
+    background: linear-gradient(#eefbfc, #cbe1ea);
+    border: 2px solid #324d8f;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    border-radius: 12px;
+}
+
+.cell.x3 {
+    width: 33.3%;
+    padding-bottom: 33.3%;
+}
+
+.cell.x5 {
+    width: 20%;
+    padding-bottom: 20%;
+}
+
+.cell.x10 {
+    width: 10%;
+    padding-bottom: 10%;
+}
+
+.cell.x15 {
+    width: 6.6%;
+    padding-bottom: 6.6%;
+    border-width: 1px;
+}
+
+.cell img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.ice {
+    border-radius: 15px;
+    width: 104%;
+    height: 99%;
+}
+
+.cell-ability {
+    background-color: black;
+}
+
+.cell-ability:hover {
+    animation:rainbow 1.5s infinite;
+}
+
+#player1-win, #player2-win, #draw {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    background: linear-gradient(#1c64e0, #032a85);
+    color: white;
+    border: 4px solid #F1428F;
+    border-radius: 15px;
+    width: 30%;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+#player1-win h3, #player2-win h3, #draw h3 {
+    display: inline-block;
+    padding-bottom: 10px;
+    font-weight: 800;
+    font-size: 30px;
+    color: #FFF;
+    border-style: solid;
+    border-width: 0 0 4px 0;
+    -moz-border-image: url(images/dotted-border.png) 7 round;
+    -webkit-border-image: url(images/dotted-border.png) 7 round;
+    -o-border-image: url(images/dotted-border.png) 7 round;
+    border-image: url(images/dotted-border.png) 7 round;
+
+}
+
+#player1-win img, #player2-win img {
+    border-radius: 15px;
+    width: 60%;
+}
+
+#draw > div {
+    display: inline-block;
+    background-color: #FFF;
+    border-radius: 100%;
+    padding: 30px;
+}
