@@ -1,12 +1,13 @@
-# hacka-tictactoe-athon
+# Kirby Fight!
 
-Scope: 
-- Make a tic-tac-toe game
-  - at least 2 players
-  - at least 3x3 board size
-  - players alternate in some way or form
-  - one player should be able to win (though is not guaranteed)
-- Additional requirements:
-  - at least 2 board sizes
-  - Dynamic win condition generation: no hard-coded if statements or data structures to determine win conditions.  Such structures can be made, but must be made dynamically via code, not hand-coded in the final product.
-  - players must be able to choose which symbol they use
+Kirby Fight! is a group project made by Srayuth Choun, Timothy Nguyen, and Deanna Sulli for the LearningFuze hacka-tictactoe-athon. It was chosen as the winner for its unique mechanics and creativity. It is a Kirby version of Tic-Tac-Toe where two players can choose a kirby with special abilities that affect the game. 
+
+Currently, this game is meant to be played on the same device; however a future version may use AI for the second player and/or online multiplayer.
+
+## Features
+- Multiple board sizes
+- Player selection
+- Player abilities
+- Dynamic win conditions
+- Sounds
+- Animations
